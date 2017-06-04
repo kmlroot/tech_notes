@@ -142,3 +142,56 @@ for {
 - Futures
 - Actors
 - Non-blockingIO
+
+## Monad
+
+The fundamentalist functional approach would mandate that typer state is represented as a monad.
+
+Instead of now:
+
+```
+def typed(tree: untpd.Tree, expected: Type): tpd.Tree
+def isSubType(tp1: Type, tp2: Type): Boolean
+```
+
+Write:
+
+```
+def types(tree: untpd.Tree, expected: Type):
+  TyperState[tpd.Tree]
+
+def isSubType(tp1: Type, tp2: Type):
+  TyperState[Boolean]
+
+```
+
+Instead of now:
+
+```
+if (isSubType(t1, t2) && isSubType(t2, t3)) result
+```
+
+Write:
+
+```
+for {
+  c1 <- isSubType(t1, t2)
+  c2 <- isSubType(t2, r3)
+  if c1 && c2
+} yield result
+```
+
+## Modules
+
+Modules can take a large number of forms
+
+- A function
+- An object
+- A class
+- An actor
+- A stream transform
+- A microservice
+
+## References
+
+- [SF Scala: Martin Odersky, Scala -- the Simple Parts](https://www.youtube.com/watch?v=ecekSCX3B4Q)
