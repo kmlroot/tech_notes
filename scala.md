@@ -192,6 +192,27 @@ Modules can take a large number of forms
 - A stream transform
 - A microservice
 
+## Implicit params
+
+Implicit params are a rather simple concept but they are surprisingly versatile
+
+Context
+
+```
+def typed(tree: untpd.Tree, expected: Type)
+  (implicit ctx: Context): Type
+
+def compile(cmdLine: String)
+  (implicit defaultOptions: List[String]): Unit
+```
+
+Capability
+
+```
+def accessProfile(id: CustomerId)
+  (implicit admin: AdminRights): Info
+```
+
 ## References
 
 - [SF Scala: Martin Odersky, Scala -- the Simple Parts](https://www.youtube.com/watch?v=ecekSCX3B4Q)
